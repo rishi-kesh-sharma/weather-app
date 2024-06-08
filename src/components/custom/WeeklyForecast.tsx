@@ -7,15 +7,18 @@ const WeeklyForecast = ({
 }: {
   currentCoordinates: { lon: number; lat: number };
 }) => {
+  // get forecast weather query
   const { isLoading, data } = useGetForecastWeatherQuery({
     lat: currentCoordinates?.lat,
     lon: currentCoordinates?.lon,
   });
 
+  // loader
   if (isLoading || !data) {
     return <h2 className="text-lg font-semibold">Loading...</h2>;
   }
 
+  // get day string from day number
   const getDayString = (day: number): string => {
     switch (day) {
       case 0:

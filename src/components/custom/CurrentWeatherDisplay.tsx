@@ -15,36 +15,34 @@ const CurrentWeatherDisplay = ({
 }: {
   currentCoordinates: { lon: number; lat: number };
 }) => {
-  console.log(
-    currentCoordinates?.lon,
-    currentCoordinates?.lat,
-    "current coordinates"
-  );
-  const { data, isLoading, error } = useGetCurrentWeatherQuery({
+  // get current weather query
+  const { data, isLoading } = useGetCurrentWeatherQuery({
     lat: currentCoordinates?.lat,
     lon: currentCoordinates?.lon,
   });
 
+  // get forecast weather query
   const { data: forecastData } = useGetForecastWeatherQuery({
     lat: currentCoordinates?.lat,
     lon: currentCoordinates?.lon,
   });
 
+  // todays date
   const todayDate = useMemo(() => {
     return moment(new Date(Date.now())).format("LL");
   }, []);
-  console.log(data, "weather data");
-  console.log(isLoading, "isloading");
-  console.log(error, "error");
-  console.log(forecastData, "forecastData");
 
+  // loader
   if (isLoading || !data || !forecastData) {
     return <h2 className="text-base font-semibold">Loading...</h2>;
   }
   return (
     <article className="flex flex-col justify-between items-stretch  border border-gray-600  rounded-lg">
+      {/* current weather info */}
       <CurrentWeather data={data} todayDate={todayDate} />
+      {/* air condition info  */}
       <AirCondition data={data} />
+      {/* todays forecast info */}
       <TodaysForecast data={forecastData} />
     </article>
   );
@@ -52,6 +50,7 @@ const CurrentWeatherDisplay = ({
 
 export default CurrentWeatherDisplay;
 
+// current weather info component
 const CurrentWeather = ({
   data,
   todayDate,
@@ -93,6 +92,8 @@ const CurrentWeather = ({
     </>
   );
 };
+
+// air condition info component
 const AirCondition = ({ data }: { data: IWeatherResponse }) => {
   return (
     <>
@@ -140,6 +141,8 @@ const AirCondition = ({ data }: { data: IWeatherResponse }) => {
     </>
   );
 };
+
+// todays forecast info component
 const TodaysForecast = ({ data }: { data: IWeatherForecastResponse }) => {
   return (
     <section className="flex flex-col w-full gap-[1.5rem] p-[2rem] border-b border-b-gray-600 justify-start">

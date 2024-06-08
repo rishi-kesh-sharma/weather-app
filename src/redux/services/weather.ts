@@ -1,9 +1,6 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IWeatherResponse,IWeatherForecastResponse } from "./types";
-
-// Define a service using a base URL and expected endpoints
-// https://api.openweathermap.org/data/2.5/weather?lat=42.5&lon=1.5&appid=b0011235ef5bece1b52b26b323021eb9&units=metric
+import { IWeatherResponse, IWeatherForecastResponse } from "./types";
 
 const WEATHER_API_KEY = `b0011235ef5bece1b52b26b323021eb9`;
 const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5`;

@@ -1,3 +1,5 @@
+// city response interface
+
 export interface ICityResponse {
   data: {
     id: string;
@@ -7,6 +9,7 @@ export interface ICityResponse {
   }[];
 }
 
+// weather response interface
 export interface IWeatherResponse {
   coord: {
     lon: number;
@@ -49,11 +52,14 @@ export interface IWeatherResponse {
   cod: number;
 }
 
+// weather forecast list item interface
+
 export interface IWeatherForecastListItem extends IWeatherResponse {
   dt: number;
   dt_txt: string;
 }
 
+// weather forecast response interface
 export interface IWeatherForecastResponse {
   cod: string;
   message: number;
